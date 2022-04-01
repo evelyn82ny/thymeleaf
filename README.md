@@ -2,6 +2,8 @@
 
 ## 텍스트 출력
 
+> commit: https://github.com/evelyn82ny/thymeleaf/commit/1807f6a35e593dec0b9afc218487d1bc5804b110
+
 - ```th:text``` : HTML tag 속성에 기능을 정의해 HTML contents 에 데이터를 출력할 때 사용
 - ```[[...]]``` : HTML contents 영역안에 직접 데이터 출력하고 싶을 때 사용
 
@@ -31,6 +33,8 @@ HTML 문서는 ```<```, ```>``` 같은 특수문자를 기반으로 정의된다
 사용자들이 HTML 에서 사용하는 특수 문자를 그냥 작성한다면 HTML 이 정상 렌더링 되지 않아 화면이 깨지는 등 수 많은 문제가 발생하기 떄문에 **escape 가 기본으로 설정**되어있다.
 
 ### unescape 
+
+> commit: https://github.com/evelyn82ny/thymeleaf/commit/bdb9ee471e7da148fbdad6d9e3dd9c36cba6447e
 
 escape 기능을 사용하지 않으려면 ```th:utext``` 또는 ```[(...)]``` 을 사용하면 된다. ```Hello <b>Spring!</b>``` 데이터를 넘겨주어도 원하는대로 결과가 출력된다.
 
