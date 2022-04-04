@@ -45,3 +45,59 @@ escape 기능을 사용하지 않으려면 ```th:utext``` 또는 ```[(...)]``` �
 
 - 웹 브라우저에 출력된 결과: th:utext = Hello **Spring!**
 - page source: <li>th:utext = <span>Hello <b>Spring!</b></span></li>
+
+<br>
+
+## SpringEL
+
+thymeleaf 에서 변수를 사용할 때 ```${...}``` 변수 표현식을 사용한다.
+
+```${...}``` 변수 표현식에 Spring 이 제공하는 SpringEL 을 사용할 수 있다.
+
+> commit: https://github.com/evelyn82ny/thymeleaf/commit/95a04641f2124ff6d533893429a33ea212a9df0b
+
+```java
+@Data
+static class User {
+    private String name;
+    private int age;
+}
+
+User userA = new User();
+List<User> list = new ArrayList<>();
+Map<String, User> map = new HashMap<>();
+
+model.addAttribute("user", userA);
+model.addAttribute("users", list);
+model.addAttribute("userMap", map);
+```
+User 객체와 User 객체를 담고 있는 list, map 을 model 에 담아 넘겨준다.
+
+```html
+<li><span th:text="${user.username}"></span></li>
+<li><span th:text="${user['username']}"></span></li>
+<li><span th:text="${user.getUsername()}"></span></li>
+```
+
+- ```user.username``` : user 의 username property 에 접근 -> ```user.getUsername()```
+- ```user['username']``` : 위와 방식과 동일
+- ```user.getUsername()``` : ```getUsername()``` 직접 호출
+
+```html
+<li><span th:text="${users[0].username}"></span></li>
+<li><span th:text="${userMap['userA'].username}"></span></li>
+```
+List, Map 도 같은 방식이다.
+
+### 지역 변수 선언
+
+> commit: https://github.com/evelyn82ny/thymeleaf/commit/5c2be6bc8cb305bc2c3dc9e0851f01a06c87d228
+
+```th:with``` 로 지역 변수를 선언할 수 있다.
+
+```html
+<h1>지역 변수 - th:with</h1>
+<div th:with="user=${users[0]}">
+    <p>첫번째 사용자 이름은 <span th:text="${user.username}"></span></p>
+</div>>
+```
