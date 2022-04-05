@@ -1,5 +1,10 @@
 # Thymeleaf
 
+## reference
+
+- Thymeleaf tutorial: https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#introducing-thymeleaf
+- HTML tag: https://pridiot.tistory.com/6
+
 ## 텍스트 출력
 
 > commit: https://github.com/evelyn82ny/thymeleaf/commit/1807f6a35e593dec0b9afc218487d1bc5804b110
@@ -101,3 +106,43 @@ List, Map 도 같은 방식이다.
     <p>첫번째 사용자 이름은 <span th:text="${user.username}"></span></p>
 </div>>
 ```
+<br>
+
+## basic objects
+
+> docs: https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#expression-basic-objects
+> <br>commit: https://github.com/evelyn82ny/thymeleaf/commit/a06fc6f07a30853573040b127c4810736d9e4ae6
+
+- ```#request``` : (only in Web contexts) the HttpServletRequest object
+- ```#response``` : (only in Web contexts) the HttpServletResponse object
+- ```#session``` : (only in Web contexts) the HttpSession object
+
+```#request``` 는 ```HttpServletRequest``` 객체가 그대로 제공되기 때문에 데이터를 조회하려면 ```request.getParameter("data"")``` 와 같이 접근해야 한다.
+
+이보다 더 편리한 접근방법이 존재한다.
+
+### param
+
+```html
+th:text="${param.paramData}"
+```
+```param``` 으로 HTTP 요청 파라미터에 바로 접근할 수 있다.
+
+```http://localhost:8080/basic/basic-objects?paramData=HelloParam``` url 작성시 ```HelloParam``` 부분을 출력한다.
+
+### session
+
+```html
+th:text="${session.sessionData}"
+```
+```java
+session.setAttribute("sessionData", "Hello Session");
+```
+```session``` 으로 HTTP session 에 접근하며 value 인 ```Hello Session``` 을 출력한다.
+
+### @ Bean
+
+```html
+th:text="${@helloBean.hello('Spring!')}"
+```
+```@``` 으로 생성한 Bean 에 접근한다.
